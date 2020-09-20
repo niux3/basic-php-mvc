@@ -57,4 +57,10 @@
             $vue = new View($this->action, $controller);
             $vue->render($data);
         }
+
+
+        protected function loadModel($model){
+            $classModel = sprintf('apps\model\%s', $model);
+            return new $classModel();
+        }
     }

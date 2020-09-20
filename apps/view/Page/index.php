@@ -2,4 +2,8 @@
     $this->layout = "default";
     $this->title = 'yoo';
 ?>
-<p><a href="page/show">Lorem ipsum</a> dolor sit amet, consectetur adipisicing elit. Quis dignissimos magni quos, facilis numquam tempora inventore nesciunt possimus fugit modi quam consequatur vel ad, dolor atque, earum. Quam, sit, <strong><?= $test ?></strong> saepe.</p>
+<?php foreach($articles as $index => $article): ?>
+<article>
+    <h1><?= $article->BIL_TITRE ?></h1>
+</article>
+<?php endforeach; ?>

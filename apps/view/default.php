@@ -9,14 +9,14 @@
     <body>
         <div id="global">
             <header>
-                <a href=""><h1 id="titreBlog">Mon Blog</h1></a>
-                <p>Je vous souhaite la bienvenue sur ce modeste blog.</p>
+                <a href=""><h1 id="titreBlog">un titre</h1></a>
+                <p><strong>Lorem ipsum dolor sit amet, consectetur adipisicing.</strong></p>
             </header>
             <div id="contenu">
                 <?= $content ?>
             </div> <!-- #contenu -->
             <footer id="piedBlog">
-                Blog réalisé avec PHP, HTML5 et CSS.
+                Application réalisée avec PHP, HTML5 et CSS.
             </footer>
         </div> <!-- #global -->
     </body>
