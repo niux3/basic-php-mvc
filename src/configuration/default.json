@@ -1,0 +1,10 @@
+{
+    "database" : {
+        "driver" : "Sqlite",
+        "path" : "model/data/db.sqlite",
+        "host" : "localhost",
+        "database" : "",
+        "user" : "",
+        "password" : ""
+    }
+}
