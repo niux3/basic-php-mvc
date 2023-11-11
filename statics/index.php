@@ -26,15 +26,35 @@ try{
     foreach($namespaces as $namespace => $path){
         $loader->addNamespace($namespace, $path);
     }
-
-    //set_error_handler(function($niveau, $message, $fichier, $ligne){
-        //echo 'Erreur : ' .$message. '<br>';
-        //echo 'Niveau de l\'erreur : ' .$niveau. '<br>';
-        //echo 'Erreur dans le fichier : ' .$fichier. '<br>';
-        //echo 'Emplacement de l\'erreur : ' .$ligne. '<br>';
-    //});
-
     $dispatcher = new \src\core\Dispatcher();
+    die;
 }catch(\src\core\Exception $e){
     $e->getError();
+}catch(\Throwable $th){
+    header("HTTP/1.0 500 Internal Server Error");
+    if(DEBUG){
+        $mask = '
+            <h1>Exception error</h1>
+            <ul>
+                <li><strong>code error</strong> : %s</li>
+                <li><strong>file</strong> : %s</li>
+                <li><strong>line</strong> : %s<br><br></li>
+                <li><strong>message</strong> : %s<br><br></li>
+            </ul>
+        ';
+        $args = [
+            $th->getCode(), 
+            $th->getFile(),
+            $th->getLine(),
+            $th->getMessage(),
+        ];
+        vprintf($mask, $args);
+    }else{
+        $ctrl = new \src\core\Controller();
+        $ctrl->render([], 'errors/500');
+    }
+    die;
+    echo '<pre>';
+    var_dump($th);
+    echo '</pre>';
 }
