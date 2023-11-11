@@ -27,7 +27,6 @@ try{
         $loader->addNamespace($namespace, $path);
     }
     $dispatcher = new \src\core\Dispatcher();
-    die;
 }catch(\src\core\Exception $e){
     $e->getError();
 }catch(\Throwable $th){

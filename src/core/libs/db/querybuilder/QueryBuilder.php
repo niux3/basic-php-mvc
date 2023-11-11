@@ -4,6 +4,8 @@ namespace src\core\libs\db\querybuilder;
 
 class QueryBuilder{
 
+    private $strategy;
+
     protected $select;
 
     protected $from;
@@ -20,8 +22,20 @@ class QueryBuilder{
 
     protected $queryType;
 
-    public function __construct($type){
+    protected $params;
+
+    public function __construct($type, $params=[]){
         $this->queryType = new QueryType($type);
+        $this->params = $params;
+        $className = sprintf('src\core\libs\db\querybuilder\%sStrategy', ucwords(strtolower(current(explode(' ', $this->queryType))))); 
+        $this->setStrategy(new $className($this->queryType, $params));
+
+        $this->strategy->execute();
+    }
+
+
+    protected function setStrategy($strategy){
+        $this->strategy = $strategy;
     }
 
 
@@ -43,11 +57,7 @@ class QueryBuilder{
 
     public function __toString(){
         $this->row[] = $this->queryType;
-        $this->row[] = $this->select;
-        $this->row[] = $this->from;
-
-        return implode(" ", $this->row);
-
+        return $this->strategy->execute();
     }
 }
 

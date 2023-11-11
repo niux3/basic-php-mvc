@@ -12,13 +12,12 @@ class PagesController extends Controller{
     }
 
     function index($name=""){
-        $q = new QueryBuilder('select');
+        $q = new QueryBuilder('insert');
         echo $q->from('pages')->select();
         $this->render([
             'rows' => $this->Page->fetchAll(),
         ]);
     }
-
 
     function show($id){
         $this->render([
