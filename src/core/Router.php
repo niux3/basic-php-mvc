@@ -11,7 +11,7 @@ class Router{
                     $request->controller = $controller;
                     $request->action = $action;
                     $request->params = [];
-                    break;
+                    return true;
                 }
                 if(is_string(strstr($v->url, ':')) === true){
                     $pattern = $v->url;
@@ -23,11 +23,12 @@ class Router{
                         $request->controller = $controller;
                         $request->action = $action;
                         $request->params = array_map(function($e){ return current($e); },array_slice($matches, 1));
-                        break;
+                        return true;
                     }
                 }
             }
         }
+        throw new Exception(sprintf('route not found : %s', $url), 404);
     }
 
     static function url($name, $params=[]){

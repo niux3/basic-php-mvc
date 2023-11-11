@@ -18,6 +18,7 @@ try{
     $loader->register();
     $namespaces = [
         'src\core\libs\db' => SRC.'core/libs/db/',
+        'src\core\libs\db\querybuilder' => SRC.'core/libs/db/querybuilder/',
         'src\core' => SRC.'core/',
         'src\controller' => SRC.'controller/',
         'src\model' => SRC.'model/',
@@ -26,7 +27,14 @@ try{
         $loader->addNamespace($namespace, $path);
     }
 
+    //set_error_handler(function($niveau, $message, $fichier, $ligne){
+        //echo 'Erreur : ' .$message. '<br>';
+        //echo 'Niveau de l\'erreur : ' .$niveau. '<br>';
+        //echo 'Erreur dans le fichier : ' .$fichier. '<br>';
+        //echo 'Emplacement de l\'erreur : ' .$ligne. '<br>';
+    //});
+
     $dispatcher = new \src\core\Dispatcher();
-}catch(Exception $e){
-    echo $e->getMessage();
+}catch(\src\core\Exception $e){
+    $e->getError();
 }

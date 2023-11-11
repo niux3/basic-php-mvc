@@ -34,14 +34,10 @@ class View {
             $mask = '%s/view/%s/%s.php';
             $this->path = sprintf($mask, SRC, $this->directory, $this->file);
             if(!file_exists($this->path)){
-                throw new \Exception(sprintf('file not found : %s', $this->path));
+                throw new Exception(sprintf('file not found : %s', $this->path), 500);
             }
         }catch(Exception $e){
-            if(DEBUG){
-                echo $e->getMessage();
-            }else{
-                // $controller = new Controller();
-            }
+            $e->getError();
         }
     }
 
@@ -59,7 +55,7 @@ class View {
         require_once sprintf('%s/view/layout/%s.php', SRC, $this->layout);
     }
 
-
+    
     /**
      * Génère un fichier vue et renvoie le résultat produit
      *
@@ -80,7 +76,7 @@ class View {
             // Arrêt de la temporisation et renvoi du tampon de sortie
             return ob_get_clean();
         } else {
-            throw new \Exception("File not found '$file'");
+            throw new Exception("File not found '$file'");
         }
     }
 

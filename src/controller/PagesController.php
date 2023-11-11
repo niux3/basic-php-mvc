@@ -2,6 +2,7 @@
 namespace src\controller;
 
 use src\core\Controller;
+use src\core\libs\db\querybuilder\QueryBuilder;
 
 
 class PagesController extends Controller{
@@ -11,6 +12,8 @@ class PagesController extends Controller{
     }
 
     function index($name=""){
+        $q = new QueryBuilder('select');
+        echo $q->from('pages')->select();
         $this->render([
             'rows' => $this->Page->fetchAll(),
         ]);
