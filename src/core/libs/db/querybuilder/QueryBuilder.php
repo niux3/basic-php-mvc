@@ -1,6 +1,8 @@
 <?php
 namespace src\core\libs\db\querybuilder;
 
+use src\core\Exception;
+
 
 class QueryBuilder{
 
@@ -15,6 +17,9 @@ class QueryBuilder{
     }
 
     public function __call($name, $args){
+        if(!in_array($name, get_class_methods($this->strategy))){
+            throw new Exception(sprintf("this method %s doesn't found", $name), 500);
+        }
         $this->strategy->$name($args);
         return $this;
     }
