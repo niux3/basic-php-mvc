@@ -4,9 +4,8 @@ namespace src\core\libs\db\querybuilder;
 use src\core\Exception;
 
 
-class From{
+class From extends AbstractMethodsQueryBuilder{
     protected $tables = [];
-    protected $queryType = '';
     
     public function __construct(){
         $params = current(func_get_args());
@@ -15,10 +14,11 @@ class From{
         $this->check();
     }
     
-    private function check(){
+    protected function check(){
         if(count($this->tables) === 0){
             throw new Exception('you must have only one table', 500);
         }
+
         if(count($this->tables) > 1 && $this->queryType == 'INSERT INTO'){
             throw new Exception('you must have one table on INSERT INTO', 500);
         }

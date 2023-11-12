@@ -6,58 +6,20 @@ class QueryBuilder{
 
     private $strategy;
 
-    protected $select;
-
-    protected $from;
-    
-    protected $where;
-    
-    protected $group;
-    
-    protected $limit;
-    
-    protected $order;
-
-    protected $row = [];
-
     protected $queryType;
 
-    protected $params;
-
-    public function __construct($type, $params=[]){
+    public function __construct($type){
         $this->queryType = new QueryType($type);
-        $this->params = $params;
         $className = sprintf('src\core\libs\db\querybuilder\%sStrategy', ucwords(strtolower(current(explode(' ', $this->queryType))))); 
-        $this->setStrategy(new $className($this->queryType, $params));
-
-        $this->strategy->execute();
+        $this->strategy = new $className($this->queryType);
     }
 
-
-    protected function setStrategy($strategy){
-        $this->strategy = $strategy;
-    }
-
-
-    public function select(){
-        $this->select = new Select([
-            "fields" => func_get_args(), 
-            "type" => $this->queryType
-        ]);
-        return $this;
-    }
-
-    public function from(){
-        $this->from = new From([
-            "tables" => func_get_args(), 
-            "type" => $this->queryType
-        ]);
+    public function __call($name, $args){
+        $this->strategy->$name($args);
         return $this;
     }
 
     public function __toString(){
-        $this->row[] = $this->queryType;
         return $this->strategy->execute();
     }
 }
-

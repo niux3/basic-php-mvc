@@ -1,6 +1,7 @@
 <?php
 namespace src\core;
 
+use src\core\libs\db\FactoryDB;
 
 abstract class Model{
     protected $db = null;
@@ -17,6 +18,6 @@ abstract class Model{
             'user' => $config->user,
             'password' => $config->password,
         ];
-        $this->db = \src\core\libs\db\FactoryDB::initialize($this->params);
+        $this->db = FactoryDB::initialize($this->params);
     }
 }

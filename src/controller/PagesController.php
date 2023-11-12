@@ -13,7 +13,7 @@ class PagesController extends Controller{
 
     function index($name=""){
         $q = new QueryBuilder('insert');
-        echo $q->from('pages')->select();
+        echo $q->from('table')->select('id', 'name')->values(':id', ':name');
         $this->render([
             'rows' => $this->Page->fetchAll(),
         ]);

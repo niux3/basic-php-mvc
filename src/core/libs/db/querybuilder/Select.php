@@ -4,9 +4,8 @@ namespace src\core\libs\db\querybuilder;
 use src\core\Exception;
 
 
-class Select{
+class Select extends AbstractMethodsQueryBuilder{
     protected $fields = [];
-    protected $queryType;
 
     
     public function __construct(){
@@ -16,7 +15,7 @@ class Select{
         $this->check();
     }
 
-    private function check(){
+    protected function check(){
         if(in_array($this->queryType, ['UPDATE', 'DELETE'])){
             throw new Exception(sprintf('select method not allowed : %s', $this->queryType), 500);
         }
