@@ -3,8 +3,12 @@
         "url" : "/",
         "method": ["GET"]
     },
+    "create@pages" : {
+        "url": "creer-pages.html",
+        "method": ["GET", "POST"]
+    },
     "other@pages" : {
-        "url" : "/:uuid-:slug-:id.html",
+        "url" : ":uuid-:slug-:id.html",
         "params" : {
             ":slug" : "([0-9a-z-]+)",
             ":id" : "([0-9]+)",

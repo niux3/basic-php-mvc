@@ -2,6 +2,7 @@
 namespace src\core;
 
 use src\core\libs\db\FactoryDB;
+use src\core\libs\db\querybuilder\QueryBuilder;
 
 abstract class Model{
     protected $db = null;
@@ -19,5 +20,9 @@ abstract class Model{
             'password' => $config->password,
         ];
         $this->db = FactoryDB::initialize($this->params);
+    }
+
+    protected function query($type){
+        return new QueryBuilder($type);
     }
 }

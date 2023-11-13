@@ -6,6 +6,7 @@ class Router{
     static function connect($url, $request){
         foreach(Configuration::get('routes') as $k => $v){
             if(in_array($_SERVER['REQUEST_METHOD'], $v->method)){
+                $v->url = $v->url[0] !== '/'? sprintf('/%s', $v->url) : $v->url;
                 if($v->url === $url){
                     list($action, $controller) = explode('@', $k);
                     $request->controller = $controller;

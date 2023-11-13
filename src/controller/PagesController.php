@@ -24,4 +24,12 @@ class PagesController extends Controller{
             'row' => current($this->Page->fetch($id))
         ]);
     }
+
+    function create(){
+        if(!empty($_POST)){
+            $this->Page->save($_POST);
+            header('location:/');
+        }
+        $this->render([]);
+    }
 }

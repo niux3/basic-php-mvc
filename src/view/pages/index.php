@@ -11,7 +11,7 @@ $this->layout = 'default';
 <p><?= $this->urlFor('show@pages', [':uuid' => '123-a56', ':id' => 1, ':slug' => 'quelque-chose'])?></p>
 <p><a href="<?=$this->urlFor('show@pages', [':uuid' => '123aze123', ':slug' => 'autre-chose', ':id' => 23]) ?>?v=123456">un lien</a></p>
 <hr>
-
+<p><a href="<?= $this->urlFor('create@pages') ?>">créer page</a></p>
 <p><?= $prenom ?></p>
 <p><?= $age ?></p>
 <p> >>>> <?= $echo ?> <<<< </p>
