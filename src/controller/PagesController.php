@@ -12,8 +12,8 @@ class PagesController extends Controller{
     }
 
     function index($name=""){
-        $q = new QueryBuilder('update');
-        echo $q->from('tables')->set('a = :a', 'b = :b')->where('id = :id OR name = :name', 'city = :city')->where('firstname = :firstname');
+        $q = new QueryBuilder('delete');
+        echo $q->from('tables')->where('id = :id OR name = :name', 'city = :city')->where('firstname = :firstname');
         $this->render([
             'rows' => $this->Page->fetchAll(),
         ]);
