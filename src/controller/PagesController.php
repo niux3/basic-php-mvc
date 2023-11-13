@@ -13,7 +13,7 @@ class PagesController extends Controller{
 
     function index($name=""){
         $q = new QueryBuilder('update');
-        echo $q->from('tables')->set('a = :a', 'b = :b')->set('c = :c')->where('id = :id OR name = :name', 'city = :city')->where('firstname = :firstname');
+        echo $q->from('tables')->set('a = :a', 'b = :b')->where('id = :id OR name = :name', 'city = :city')->where('firstname = :firstname');
         $this->render([
             'rows' => $this->Page->fetchAll(),
         ]);
