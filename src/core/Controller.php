@@ -10,6 +10,7 @@ class Controller{
     }
 
     function render($data=[], $template=""){
+        $this->beforeRender($this);
         $directory = strtolower($this->request->controller);
         $viewFile = $this->request->action;
 
@@ -23,6 +24,7 @@ class Controller{
 
         $view = new View($directory, str_replace('.php', '', $viewFile));
         $view->render($data);
+        $this->afterRender($this);
     }
 
 
@@ -32,5 +34,12 @@ class Controller{
         }
         $classModel = sprintf('src\model\%s', $modelName);
         return new $classModel();
+    }
+
+    protected function beforeRender(){
+        return;
+    }
+    protected function afterRender(){
+        return;
     }
 }
